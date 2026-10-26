@@ -1,8 +1,4 @@
 # CNTT1-nh-p-m-n-c-ng-ngh-th-ng-tin-Session13_Ex02
-Dưới đây là phiên bản mở rộng chi tiết với văn phong tự nhiên, bám sát nghiệp vụ kỹ thuật thực tế và tránh các lỗi lặp từ hay văn mẫu rập khuôn:
-
----
-
 ### PHẦN 1. NỀN TẢNG TƯ DUY VÀ QUẢN TRỊ HẠ TẦNG
 
 #### 1. Vận dụng mô hình IPO và DIKW trong vận hành
