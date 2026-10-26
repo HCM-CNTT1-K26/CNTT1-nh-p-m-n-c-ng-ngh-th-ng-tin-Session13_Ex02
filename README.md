@@ -34,10 +34,9 @@ Một dự án hạ tầng chuẩn mực tuyệt đối không trộn lẫn mã 
 
 Thay vì tạo từng thư mục thủ công bằng tay, ta gom nhóm câu lệnh lồng nhau để thiết lập toàn bộ cấu trúc trong vòng một nốt nhạc:
 
-```cmd
+
 mkdir greentech-system\docs greentech-system\scripts greentech-system\data greentech-system\backup && cd greentech-system && type nul > .env
 
-```
 
 * **Kiểm tra trực quan:** Sử dụng lệnh `tree /F` để rà soát lại cây thư mục.
 * **Lưu ý bảo mật:** Tệp `.env` đặt ở thư mục gốc dùng để chứa các chuỗi kết nối nhạy cảm, phải được khai báo trong tệp `.gitignore` để tránh bị đẩy lên kho lưu trữ công cộng.
@@ -46,7 +45,7 @@ mkdir greentech-system\docs greentech-system\scripts greentech-system\data green
 
 Đối với các tệp log dung lượng lớn (có thể lên tới hàng trăm MB), việc mở trực tiếp bằng trình soạn thảo văn bản thông thường sẽ làm tràn RAM máy chủ. Giải pháp tối ưu là sử dụng lệnh dòng lệnh kết hợp ống dẫn (Pipe):
 
-```bat
+
 @echo off
 if not exist "..\backup" mkdir "..\backup"
 echo ===== BAO CAO SU CO HE THONG ===== >> ..\backup\bao-cao-su-co.txt
@@ -54,7 +53,7 @@ echo Thoi gian chay: %date% %time% >> ..\backup\bao-cao-su-co.txt
 type ..\data\log-he-thong.log | findstr /I "CRITICAL ERROR TIMEOUT" >> ..\backup\bao-cao-su-co.txt
 echo [SUCCESS] Da hoan tat trich xuat log.
 
-```
+
 
 * **Kỹ thuật cốt lõi:** Luôn sử dụng toán tử nối tệp `>>` thay vì dấu ghi đè `>`. Nếu lỡ dùng `>`, toàn bộ lịch sử báo cáo cũ được ghi nhận trước đó sẽ bị xóa sạch hoàn toàn.
 
@@ -68,17 +67,17 @@ echo [SUCCESS] Da hoan tat trich xuat log.
 Để quản lý kho thiết bị và trạng thái trạm không bị sai sót do nhập liệu thủ công, ta áp dụng tư duy cơ sở dữ liệu quan hệ thu nhỏ:
 
 1. **Làm sạch dữ liệu nguồn:** Các chuỗi mã linh kiện thường dễ dính khoảng trắng thừa ở đầu hoặc cuối. Phải chuẩn hóa trước bằng hàm:
-```excel
+excel
 =TRIM(B2)
 
-```
+
 
 
 2. **Thiết lập công thức tra cứu VLOOKUP:**
-```excel
+excel
 =VLOOKUP(TRIM(B2), 'danh-muc-linh-kien'!$A$2:$D$100, 2, FALSE)
 
-```
+
 
 
 * *Mẹo chuyên môn:* Vùng tham chiếu bắt buộc phải dùng dấu cố định tuyệt đối  để khi kéo công thức xuống các dòng bên dưới, vùng tìm kiếm không bị dịch chuyển lệch tọa độ. Tuyệt đối không để trống dòng hoặc dùng tính năng `Merge Cell` trong bảng dữ liệu thô để tránh làm hỏng bộ lọc `AutoFilter`.
